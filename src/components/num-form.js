@@ -10,8 +10,6 @@ export default class InputField extends React.Component {
       tries:null,
       msg:"",
     }
-
-
   }
   handleSeachChanged(event) {
     this.setState({search: event.target.value})
@@ -29,7 +27,7 @@ export default class InputField extends React.Component {
         tries++
         console.log(arr[i])
           if (arr[i] === parseInt(value,10)) {
-            const result = `${value} was found in the dataset after ${tries}  tries.`
+            const result = `You got it dude ${value} was found in the dataset after ${tries}  tries.`
             console.log(result)
             this.setState({
               msg:result,
@@ -53,8 +51,40 @@ export default class InputField extends React.Component {
         this.linearSearch(this.state.data, this.state.search);
       }
     
-  
+      binarySearch(array,value, start=0,end=array.length-1, tries=0){
 
+        tries++;
+    if (start > end) {
+      const fail = `This value is not in our dataset dude`
+      this.setState({
+        msg:fail
+      })
+    }
+
+    const index = Math.floor((start + end) / 2);
+    const item = array[index];
+
+    console.log(start, end);
+    if (item == parseInt(value,10)) {
+       const succesful = `${value} was found, NICE took this long though ${tries}`
+       this.setState({
+        msg:succesful
+      })
+    }
+    else if (item <parseInt(value,10)) {
+      tries++;
+        return this.binarySearch(array, value, index + 1, end);
+    }
+    else if (item > parseInt(value,10)) {
+      tries++;
+        return this.binarySearch(array, value, start, index - 1);
+    }
+
+  }
+  handleBinSearch() {
+    const sorted= this.state.data.sort((a, b) => a - b)
+    this.binarySearch(sorted, this.state.search);
+  }
 
   render () {
     console.log()
@@ -67,7 +97,7 @@ export default class InputField extends React.Component {
       <input 
       onChange={(e)=> this.handleSeachChanged(e)}name="search" type="number" placeholder="Search.."/>
       <button onClick={()=> this.handleLinSearch()}>Linear Search</button>
-      <button>Binary Search</button>
+      <button onClick={()=> this.handleBinSearch()}>Binary Search</button>
         </form>
         <div>
            <p> {this.state.msg}</p>
@@ -77,4 +107,4 @@ export default class InputField extends React.Component {
       </div>
     );
   }
-}
+};

@@ -18,6 +18,8 @@ class App extends Component {
     return -1;
 };
     render() {
+      const PI2 = Math.PI * 2
+let random = (min, max) => Math.random() * (max - min + 1) + min | 0
         return (<NumForm/>);
     }
 }
