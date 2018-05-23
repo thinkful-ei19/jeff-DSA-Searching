@@ -1,0 +1,21 @@
+*{
+  margin: 0;
+  overflow-x: hidden;
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: #CCCC99;
+}
+.banner{
+  text-align: center;
+  background: #003366;
+  color: white
+}
+.form-banner{
+  text-align: center;
+  margin-top: 2em;
+}
